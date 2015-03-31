@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>learning es6 with babel - const | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="const用來聲明常量，也就是該變數的值在聲明後不會再改變，跟let一樣有block scope，沒有hoisting12345678910//es6const PI = 3.14159;// 按照js的naming rule, 常量應該全部大寫console.log(PI); // &amp;lt;= 3">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="learning es6 with babel - const"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-20T15:29:12.000Z"><a href="/2015/03/20/2015-03-20-learning-es6-with-babel-const/">2015-03-20</a></time>
+      
+      
+  
+    <h1 class="title">learning es6 with babel - const</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><code>const</code>用來聲明常量，也就是該變數的值在聲明後不會再改變，跟<code>let</code>一樣有block scope，沒有<br>hoisting<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//es6</span></span><br><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line"><span class="comment">// 按照js的naming rule, 常量應該全部大寫</span></span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">// &lt;= 3.14159</span></span><br><span class="line"></span><br><span class="line">PI = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">// &lt;= 3.14159</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PI = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(PI); <span class="comment">// &lt;= 3.14159</span></span><br></pre></td></tr></table></figure></p>
+<p>babel會在compile階段就檢查<code>PI</code>是不是在宣告後有試圖去改變他，所以上面這段會出現Error<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">repl: Line <span class="number">6</span>: <span class="string">"PI"</span> is read-only</span><br><span class="line">  <span class="number">4</span> <span class="string">| console.log(PI); // &lt;= 3.14159</span></span><br><span class="line">  <span class="number">5</span> <span class="string">|</span></span><br><span class="line">&gt; <span class="number">6</span> <span class="string">| PI = 3;</span></span><br><span class="line">    <span class="string">| ^</span></span><br><span class="line">  <span class="number">7</span> <span class="string">| console.log(PI); // &lt;= 3.14159</span></span><br><span class="line">  <span class="number">8</span> <span class="string">|</span></span><br><span class="line">  <span class="number">9</span> <span class="string">|</span></span><br></pre></td></tr></table></figure></p>
+<p>由於常量的特性是在compile階段檢查的，所以babel對於<code>const</code>其餘特性(block scope,<br>  no hoising)的實現方式就跟<code>let</code>一樣<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//es6</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> PI = <span class="number">3.14159</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//babel</span></span><br><span class="line"><span class="pi">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _temporalAssertDefined = <span class="function"><span class="keyword">function</span> <span class="params">(val, name, undef)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (val === undef) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">ReferenceError</span>(name + <span class="string">" is not defined - temporal dead zone"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _temporalUndefined = &#123;&#125;;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> PI = _temporalUndefined;</span><br><span class="line">  PI = <span class="number">3.14159</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意的是<code>const</code>不等於<code>Object.freeze()</code>：<code>const</code>是固定變數的參考，<code>Object.freeze()</code><br>則是固定變數參考對象的值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">foo.prop = <span class="number">123</span>;</span><br><span class="line"><span class="built_in">console</span>.log(foo.prop); <span class="comment">// &lt;= 123</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.freeze(bar);</span><br><span class="line"></span><br><span class="line">bar.prop = <span class="number">123</span>;</span><br><span class="line"><span class="built_in">console</span>.log(bar.prop); <span class="comment">// &lt;= undefined</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://apolkingg8.github.io/2015/03/20/2015-03-20-learning-es6-with-babel-const/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:apolkingg8.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Net/">.Net</a><small>1</small></li>
+  
+    <li><a href="/categories/github/Octopress/">Octopress</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/RWD/">RWD</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>11</small></li>
+  
+    <li><a href="/categories/logdown/">logdown</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/">微軟</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/Net/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/">閒聊</a><small>1</small></li>
+  
+    <li><a href="/categories/logdown/閒聊/">閒聊</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/learning-es6/">learning, es6</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[筆記] Cordova 3.4 with WP8 踩地雷紀錄 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="這整個過程讓我想到WOW裡的一個成就： ［這真是段漫長又奇妙的旅程］不過漫長奇妙之外還多了很多的痛苦就是了…ORZ
+1. cordova platform add wp8時出現亂碼錯誤…亂碼是要我怎麼debug阿大哥…不過還好下面有stack，可以看到問題出在wp8_parser.js這隻裡面的這段">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="[筆記] Cordova 3.4 with WP8 踩地雷紀錄"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-16T21:52:00.000Z"><a href="/2014/05/17/2014-05-17-note-cordova-34-with-wp8-minesweeper-records/">2014-05-17</a></time>
+      
+      
+  
+    <h1 class="title">[筆記] Cordova 3.4 with WP8 踩地雷紀錄</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>這整個過程讓我想到WOW裡的一個成就： <strong>［這真是段漫長又奇妙的旅程］</strong><br>不過漫長奇妙之外還多了很多的痛苦就是了…ORZ</p>
+<h3 id="1-_cordova_platform_add_wp8時出現亂碼錯誤">1. <code>cordova platform add wp8</code>時出現亂碼錯誤</h3><p>…亂碼是要我怎麼debug阿大哥…<br>不過還好下面有stack，可以看到問題出在<code>wp8_parser.js</code>這隻裡面的這段：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">child_process.exec(command, <span class="function"><span class="keyword">function</span><span class="params">(err, output, stderr)</span> </span>&#123;</span><br><span class="line">  events.emit(<span class="string">'verbose'</span>, output);</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">  	d.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Requirements check failed: '</span> + output + stderr));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  	d.resolve();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>恩，還是沒有頭緒，試著把err catch註解掉，會得到另一個error<code>副檔名 .js 沒有對應的 script 引擎</code><br>於是按照google大神的指示，裝了Windows Scrip，然後再把原本的err catch加回去…就可以了。</p>
+<blockquote>
+<p>老實說小弟才疏學淺完全不知道發生了什麼事…懇請前輩們指點</p>
+</blockquote>
+<h3 id="2-_cordova_platform_add_wp8成功，但是在CREAT_SUCCESS之後，要加入plugin時發生錯誤Non-white_space_before_first_tag">2. <code>cordova platform add wp8</code>成功，但是在CREAT SUCCESS之後，要加入plugin時發生錯誤<code>Non-white space before first tag</code></h3><p>原因出在<code>\platforms\wp8\CordovaWP8AppProj.csproj</code>跟<code>\platforms\wp8\Properties\WMAppManifest.xml</code>這兩隻檔案一開始的宣告出現亂碼。<br>這是個尚未被解決的Bug，可以參考<a href="https://issues.apache.org/jira/browse/CB-6301" target="_blank" rel="external">這篇</a><br>雖然提出者的環境是簡體中文，但是最底下的解法在繁中的環境下依然有效：</p>
+<blockquote>
+<p>wei jiang added a comment - 09/Apr/14 14:26<br>I have found a solution for this issue:<br>1、open C:\Users.cordova\lib\wp\cordova\3.4.0\wp8\bin\create.js<br>line 68:<br>change<br>‘var f=fso.OpenTextFile(filename,1,2);’<br>to<br>‘var f=fso.OpenTextFile(filename,ForReading,false,TristateFalse);’<br>line 75:<br>change<br>‘var f=fso.OpenTextFile(filename, ForWriting, TristateFalse);’<br>to<br>‘var f=fso.OpenTextFile(filename, ForWriting,true, TristateFalse);’<br>2、Change the encoding of these files to ‘UTF-8 without BOM’<br>in C:\Users.cordova\lib\wp\cordova\3.4.0\wp8\template<br>App.xaml<br>App.xaml.cs<br>CordovaWP8AppProj.csproj<br>CordovaWP8Solution.sln<br>MainPage.xaml.cs<br>Properties\WMAppManifest.xml<br>ps:I did this using Notepad++</p>
+</blockquote>
+<p>另外，<a href="http://my.oschina.net/arrowing/blog/181476#OSC_h2_14" target="_blank" rel="external">這篇</a>也有另一種做法，不過可能是系統語言不同的關係，我用這種作法會沒辦法正確的parse xml。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://apolkingg8.github.io/2014/05/17/2014-05-17-note-cordova-34-with-wp8-minesweeper-records/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:apolkingg8.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Net/">.Net</a><small>1</small></li>
+  
+    <li><a href="/categories/github/Octopress/">Octopress</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/RWD/">RWD</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>11</small></li>
+  
+    <li><a href="/categories/logdown/">logdown</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/">微軟</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/Net/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/">閒聊</a><small>1</small></li>
+  
+    <li><a href="/categories/logdown/閒聊/">閒聊</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/learning-es6/">learning, es6</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

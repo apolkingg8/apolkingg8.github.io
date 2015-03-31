@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[心得] jQuery Widget Factory極簡教學 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="簡介jQuery Widget Factory是jQuery UI提供的一個方法，用Factory Mode來建立 有狀態的 jQuery plugin。大多數的jQueryUI都是用這個方法產生的，例如button：123$.widget( &quot;ui.button&quot;, &amp;#123;	// ...  &amp;#125;);
+不過也有些是例外，像datepicker就不是用這個方法產生的。
+如何使用這個方法是基於jQuery，而不是jQuery UI Core，但是他的位置是在jQueryui.js裡面，所以兩者都必須引入
+
+註：如果不需要其他jQueryUI的話，可以只載入jquery.ui.widget.js
+
+12&amp;lt;script type=&quot;text/javascript&quot; src=&quot;Libs/jquery-1.9.1.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script type=&quot;text/javascript&quot; src=&quot;Libs/jquery-ui-1.10.3.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+方法的格式如下：1$.widget(&#39;namespace.uiName&#39;, [base], prototype)
+namespace只能有一層，像jQueryUI就是用ui.button[base]可選，用來指定已存在的物件當作基底，預設值是$.widget。例如你想要以jqueryUI的dialog為基底產生一個新的plugin，就可以像這樣：12345$.widget( &quot;custom.superDialog&quot;, $.ui.dialog, &amp;#123;    red: function() &amp;#123;        this.element.css( &quot;color&quot;, &quot;red&quot; );    &amp;#125;&amp;#125;);
+prototype這個widget的prototype object，套件的方法及設定都在這裡實作。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="[心得] jQuery Widget Factory極簡教學"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-11T00:45:00.000Z"><a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/">2014-01-11</a></time>
+      
+      
+  
+    <h1 class="title">[心得] jQuery Widget Factory極簡教學</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="簡介">簡介</h2><p>jQuery Widget Factory是jQuery UI提供的一個方法，用Factory Mode來建立 <strong>有狀態的</strong> jQuery plugin。大多數的jQueryUI都是用這個方法產生的，例如<code>button</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"ui.button"</span>, &#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>不過也有些是例外，像<code>datepicker</code>就不是用這個方法產生的。</p>
+<h2 id="如何使用">如何使用</h2><p>這個方法是基於jQuery，而不是jQuery UI Core，但是他的位置是在jQueryui.js裡面，所以兩者都必須引入</p>
+<blockquote>
+<p>註：如果不需要其他jQueryUI的話，可以只載入jquery.ui.widget.js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-1.9.1.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-ui-1.10.3.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>方法的格式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.widget(<span class="string">'namespace.uiName'</span>, [base], prototype)</span><br></pre></td></tr></table></figure></p>
+<p><code>namespace</code>只能有一層，像jQueryUI就是用<code>ui.button</code><br><code>[base]</code>可選，用來指定已存在的物件當作基底，預設值是<code>$.widget</code>。例如你想要以jqueryUI的<code>dialog</code>為基底產生一個新的plugin，就可以像這樣：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.superDialog"</span>, $.ui.dialog, &#123;</span><br><span class="line">    red: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element.css( <span class="string">"color"</span>, <span class="string">"red"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><code>prototype</code>這個widget的prototype object，套件的方法及設定都在這裡實作。</p>
+<a id="more"></a>
+<h2 id="簡單的範例">簡單的範例</h2><p>下面是一個來自官網的簡單的範例，可以在jsBin玩玩看。</p>
+<p>首先，建立一個progressbar，然後設定他的初始化方法<code>_creat()</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.progressbar"</span>, &#123;</span><br><span class="line">    _create: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> progress = <span class="string">"%"</span>;</span><br><span class="line">        <span class="keyword">this</span>.element</span><br><span class="line">            .addClass( <span class="string">"progressbar"</span> )</span><br><span class="line">            .text( progress );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>還有另一個方法<code>_init</code>，兩者間的差異請參考官方文件<br>這裡有另一個重點是<code>this.element</code>。如果用一般方法作jquery plugin的話，取得的this是selector後的jquery物件群組，但是widget中的 <strong>this.element永遠只有一個</strong> ，如果你selector後的jquery物件群組有多個物件，他會 <strong>對每個對象各執行一次</strong> 。</p>
+</blockquote>
+<p>為這個pregressbar增加option，設定初始化的值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.progressbar"</span>, &#123;</span><br><span class="line">		options: &#123;</span><br><span class="line">    	value: <span class="number">20</span>%</span><br><span class="line">    &#125;,</span><br><span class="line">    _create: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> progress = <span class="keyword">this</span>.options.value + <span class="string">"%"</span>;</span><br><span class="line">        <span class="keyword">this</span>.element</span><br><span class="line">            .addClass( <span class="string">"progressbar"</span> )</span><br><span class="line">            .text( progress );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>options</code>是內建屬性，套件的參數會以key-value pair的形式傳到這個物件裡面，在這裡我們給予參數<code>value</code>預設值<code>&#39;20%&#39;</code>。  </p>
+</blockquote>
+<p>為套件增加public method<code>getValue</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.myprogressbar"</span>, &#123;</span><br><span class="line">	options: &#123;</span><br><span class="line">		value: <span class="string">'20'</span></span><br><span class="line">	&#125;,</span><br><span class="line">	getValue: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.options.value;</span><br><span class="line">	&#125;,</span><br><span class="line">	_create: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> progress = <span class="keyword">this</span>.options.value + <span class="string">"%"</span>;</span><br><span class="line">		<span class="keyword">this</span>.element.text( progress );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>widget factory提供了很簡單的作法去區分private與public：前面有加<code>_</code>的會實作為private，其餘則是public，很方便吧？</p>
+</blockquote>
+<p>接下來，初始化套件並傳遞參數<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'progressDiv'</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'progressDiv'</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.progressDiv'</span>).myprogressbar(&#123; </span><br><span class="line">	value: <span class="number">70</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>試看看剛剛寫的方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log($(<span class="string">'.progressDiv'</span>).myprogressbar(<span class="string">'getValue'</span>)); <span class="comment">// 70 * 2</span></span><br></pre></td></tr></table></figure></p>
+<p>完成了！恭喜你，你會製作（簡單的）jQuery plugin了XD<br><a href="http://jsbin.com/oRIjaVa/1/edit?html,console,output" target="_blank" rel="external">jsBin Demo</a></p>
+<h2 id="參考文件">參考文件</h2><p><a href="http://learn.jquery.com/jquery-ui/widget-factory/" target="_blank" rel="external">jQuery官網教程</a><br><a href="http://api.jqueryui.com/jQuery.widget/#jQuery-widget1" target="_blank" rel="external">Widget Factory API Document</a></p>
+<h2 id="後記">後記</h2><p>真的有點簡略阿（汗），其實製作過程中還有不少眉眉角角，不過一時之間不好整理出來，有機會再作補充。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://apolkingg8.github.io/2014/01/11/2014-01-11-experiencejquery-widget-factory/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:apolkingg8.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Net/">.Net</a><small>1</small></li>
+  
+    <li><a href="/categories/github/Octopress/">Octopress</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/RWD/">RWD</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>11</small></li>
+  
+    <li><a href="/categories/logdown/">logdown</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/微軟/">微軟</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/Net/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+  
+    <li><a href="/categories/閒聊/">閒聊</a><small>1</small></li>
+  
+    <li><a href="/categories/logdown/閒聊/">閒聊</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/learning-es6/">learning, es6</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
