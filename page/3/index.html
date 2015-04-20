@@ -49,91 +49,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-01-15T06:37:00.000Z"><a href="/2014/01/15/2014-01-15--number-of-kaohsiung-mrt-station/">2014-01-15</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/01/15/2014-01-15--number-of-kaohsiung-mrt-station/">[產出] 高雄捷運進站人數變化圖</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Demo: <a href="http://apolkingg8.github.io/DemoPages/KRT_logMap/demo.html" target="_blank" rel="external">http://apolkingg8.github.io/DemoPages/KRT_logMap/demo.html</a></p>
-<p>前陣子之前在社團看到北捷的運量變化圖，心血來潮就想說來個高捷版，不過基於各種原因拖到現在才做好XD</p>
-<p>剛開始猶豫很久，要用SVG還是Canvas還是純CSS，最後因為相容性的關係而選擇了SVG，不過最後做跨瀏覽器測試的時候還是有點問題（Opera有時候會卡住，平平都是Blink阿）。因為跟SVG不熟，做到後來有種想打掉重做的衝動（例如包裝架構，互動方式，還有那個根本沒必要的Slider…），不過還是等有空再說吧，好多預計要看要玩的東西都還沒動呢（跪</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-01-11T00:45:00.000Z"><a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/">2014-01-11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/">[心得] jQuery Widget Factory極簡教學</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="簡介">簡介</h2><p>jQuery Widget Factory是jQuery UI提供的一個方法，用Factory Mode來建立 <strong>有狀態的</strong> jQuery plugin。大多數的jQueryUI都是用這個方法產生的，例如<code>button</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"ui.button"</span>, &#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
-<p>不過也有些是例外，像<code>datepicker</code>就不是用這個方法產生的。</p>
-<h2 id="如何使用">如何使用</h2><p>這個方法是基於jQuery，而不是jQuery UI Core，但是他的位置是在jQueryui.js裡面，所以兩者都必須引入</p>
-<blockquote>
-<p>註：如果不需要其他jQueryUI的話，可以只載入jquery.ui.widget.js</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-1.9.1.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-ui-1.10.3.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>方法的格式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.widget(<span class="string">'namespace.uiName'</span>, [base], prototype)</span><br></pre></td></tr></table></figure></p>
-<p><code>namespace</code>只能有一層，像jQueryUI就是用<code>ui.button</code><br><code>[base]</code>可選，用來指定已存在的物件當作基底，預設值是<code>$.widget</code>。例如你想要以jqueryUI的<code>dialog</code>為基底產生一個新的plugin，就可以像這樣：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.superDialog"</span>, $.ui.dialog, &#123;</span><br><span class="line">    red: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element.css( <span class="string">"color"</span>, <span class="string">"red"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p><code>prototype</code>這個widget的prototype object，套件的方法及設定都在這裡實作。</p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2014-01-10T23:36:00.000Z"><a href="/2014/01/11/2014-01-11-output-on-top-of-the-picture-message-jquery-plugin-commentonphoto/">2014-01-11</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/01/11/2014-01-11-output-on-top-of-the-picture-message-jquery-plugin-commentonphoto/">[產出] 在圖片上留言的jQuery plugin - CommentOnPhoto</a></h1>
+    <h1 class="title"><a href="/2014/01/11/2014-01-11-output-on-top-of-the-picture-message-jquery-plugin-commentonphoto/">在圖片上留言的jQuery plugin - CommentOnPhoto</a></h1>
   
 
     </header>
@@ -170,7 +90,7 @@
       
       
   
-    <h1 class="title"><a href="/2014/01/04/2014-01-04-jquerydatepicker-republic-of-china/">[產出] jQueryDatePicker民國版</a></h1>
+    <h1 class="title"><a href="/2014/01/04/2014-01-04-jquerydatepicker-republic-of-china/">jQueryDatePicker民國版</a></h1>
   
 
     </header>
@@ -201,43 +121,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-01-02T03:21:00.000Z"><a href="/2014/01/02/2014-01-02-notesprototype-with-proto/">2014-01-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/01/02/2014-01-02-notesprototype-with-proto/">[筆記] prototype與__proto__</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2014-01-01T07:08:00.000Z"><a href="/2014/01/01/2014-01-01-notenet-npoi/">2014-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/01/01/2014-01-01-notenet-npoi/">[筆記] .NET NPOI</a></h1>
+    <h1 class="title"><a href="/2014/01/01/2014-01-01-notenet-npoi/">.NET NPOI</a></h1>
   
 
     </header>
@@ -286,7 +174,7 @@
       
       
   
-    <h1 class="title"><a href="/2013/12/31/2013-12-31-note-javascriptthe-good-parts-bad-part-2/">[筆記] Javascript : The Good Parts - 不良的部分</a></h1>
+    <h1 class="title"><a href="/2013/12/31/2013-12-31-note-javascriptthe-good-parts-bad-part-2/">Javascript : The Good Parts - 不良的部分</a></h1>
   
 
     </header>
@@ -335,7 +223,7 @@
       
       
   
-    <h1 class="title"><a href="/2013/12/24/2013-12-24-note-javascriptthe-good-parts-bad-part-1/">[筆記] Javascript : The Good Parts - 糟糕的部分</a></h1>
+    <h1 class="title"><a href="/2013/12/24/2013-12-24-note-javascriptthe-good-parts-bad-part-1/">Javascript : The Good Parts - 糟糕的部分</a></h1>
   
 
     </header>
@@ -372,17 +260,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-12-24T00:42:00.000Z"><a href="/2013/12/24/2013-12-24-168788/">2013-12-24</a></time>
+        <time datetime="2013-12-23T20:46:00.000Z"><a href="/2013/12/24/2013-12-24-moved-from-blogger-to-logdown/">2013-12-24</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/12/24/2013-12-24-168788/">[筆記] Javascript : The Good Parts - Ch.9 風格</a></h1>
+    <h1 class="title"><a href="/2013/12/24/2013-12-24-moved-from-blogger-to-logdown/">從Blogger搬到Logdown</a></h1>
   
 
     </header>
     <div class="entry">
       
-        
+        <p>偶然在社群看到這個東西，試用過後有種 <strong>“寶貝~我終於找到你了”</strong> 的感覺XD<br>可以用Markdown寫文章，又不必像Octorpess萬事手動，當下就決定把Blogger搬過來</p>
+<p>不過短暫的試用後，發現還是有些缺點，像是: </p>
+<pre><code><span class="bullet">1. </span>以前從Chrome Console複製到Blogger會帶Style（應該說從任何地方都會），現在少了這個，只好把結果打在註解裡．
+<span class="bullet">2. </span>然後之前的舊文轉過來也會有些走樣（很多style都不見了），所以要看原本的樣子可能要回到[<span class="link_label">Blogger</span>](<span class="link_url">http://apolkingg8.blogspot.com</span>)那邊看．
+<span class="bullet">3. </span>社群資源有差（theme很少，bug修比較慢），畢竟這是要用時間累積的
+</code></pre><p>整體來說，還蠻喜歡這個平台的（其實是單純喜歡Markdown吧XD），如果這幾天沒發現什麼大問題的話，以後應該就會以這邊為主．</p>
+
       
     </div>
     <footer>
@@ -404,22 +298,116 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-12-23T20:46:00.000Z"><a href="/2013/12/24/2013-12-24-moved-from-blogger-to-logdown/">2013-12-24</a></time>
+        <time datetime="2013-12-19T08:16:00.000Z"><a href="/2013/12/19/2013-12-19-javascript-good-parts-ch6/">2013-12-19</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/12/24/2013-12-24-moved-from-blogger-to-logdown/">[閒聊] 從Blogger搬到Logdown</a></h1>
+    <h1 class="title"><a href="/2013/12/19/2013-12-19-javascript-good-parts-ch6/">Javascript : The Good Parts - Ch.6 陣列</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>偶然在社群看到這個東西，試用過後有種 <strong>“寶貝~我終於找到你了”</strong> 的感覺XD<br>可以用Markdown寫文章，又不必像Octorpess萬事手動，當下就決定把Blogger搬過來</p>
-<p>不過短暫的試用後，發現還是有些缺點，像是: </p>
-<pre><code><span class="bullet">1. </span>以前從Chrome Console複製到Blogger會帶Style（應該說從任何地方都會），現在少了這個，只好把結果打在註解裡．
-<span class="bullet">2. </span>然後之前的舊文轉過來也會有些走樣（很多style都不見了），所以要看原本的樣子可能要回到[<span class="link_label">Blogger</span>](<span class="link_url">http://apolkingg8.blogspot.com</span>)那邊看．
-<span class="bullet">3. </span>社群資源有差（theme很少，bug修比較慢），畢竟這是要用時間累積的
-</code></pre><p>整體來說，還蠻喜歡這個平台的（其實是單純喜歡Markdown吧XD），如果這幾天沒發現什麼大問題的話，以後應該就會以這邊為主．</p>
+        <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/javascript-good-parts-ch6.html" target="_blank" rel="external">點此</a>觀看原文．</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-18T08:48:00.000Z"><a href="/2013/12/18/2013-12-18-javascript-good-parts-ch5-19/">2013-12-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/18/2013-12-18-javascript-good-parts-ch5-19/">Javascript : The Good Parts - Ch.5 繼承 (二)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/javascript-good-parts-ch5_19.html" target="_blank" rel="external">點此</a>觀看原文．</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-18T00:47:00.000Z"><a href="/2013/12/18/2013-12-18-github-pages-octopress-on-windows/">2013-12-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/18/2013-12-18-github-pages-octopress-on-windows/">GitHub Pages + Octopress on Windows初體驗</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/github-pages-octopress-on-windows.html" target="_blank" rel="external">點此</a>觀看原文．</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-13T23:27:00.000Z"><a href="/2013/12/14/2013-12-14-javascript-good-parts-ch5/">2013-12-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/14/2013-12-14-javascript-good-parts-ch5/">Javascript : The Good Parts - Ch.5 繼承 (一)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/javascript-good-parts-ch5.html" target="_blank" rel="external">點此</a>觀看原文．</p>
 
       
     </div>
@@ -459,47 +447,51 @@
   <h3 class="title">分類</h3>
   <ul class="entry">
   
-    <li><a href="/categories/Net/">.Net</a><small>1</small></li>
+    <li><a href="/categories/Net/">.Net</a><small>0</small></li>
   
-    <li><a href="/categories/github/Octopress/">Octopress</a><small>1</small></li>
+    <li><a href="/categories/github/Octopress/">Octopress</a><small>0</small></li>
   
     <li><a href="/categories/閒聊/微軟/RWD/">RWD</a><small>1</small></li>
   
-    <li><a href="/categories/github/">github</a><small>1</small></li>
+    <li><a href="/categories/閒聊/微軟/RWD/">RWD</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/">javascript</a><small>11</small></li>
+    <li><a href="/categories/github/">github</a><small>0</small></li>
   
-    <li><a href="/categories/logdown/">logdown</a><small>1</small></li>
+    <li><a href="/categories/javascript/">javascript</a><small>9</small></li>
+  
+    <li><a href="/categories/logdown/">logdown</a><small>0</small></li>
   
     <li><a href="/categories/閒聊/微軟/">微軟</a><small>1</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/閒聊/微軟/">微軟</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/Net/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/Net/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/javascript/筆記/">筆記</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/閒聊/">閒聊</a><small>1</small></li>
+    <li><a href="/categories/javascript/筆記/">筆記</a><small>0</small></li>
   
-    <li><a href="/categories/logdown/閒聊/">閒聊</a><small>1</small></li>
+    <li><a href="/categories/閒聊/">閒聊</a><small>3</small></li>
+  
+    <li><a href="/categories/logdown/閒聊/">閒聊</a><small>0</small></li>
   
   </ul>
 </div>
@@ -510,7 +502,43 @@
   <h3 class="title">標籤</h3>
   <ul class="entry">
   
-    <li><a href="/tags/learning-es6/">learning, es6</a><small>1</small></li>
+    <li><a href="/tags/NET/">.NET</a><small>1</small></li>
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Babel/">Babel</a><small>3</small></li>
+  
+    <li><a href="/tags/Backbone/">Backbone</a><small>1</small></li>
+  
+    <li><a href="/tags/CSS/">CSS</a><small>5</small></li>
+  
+    <li><a href="/tags/Chrome/">Chrome</a><small>1</small></li>
+  
+    <li><a href="/tags/Cordova/">Cordova</a><small>4</small></li>
+  
+    <li><a href="/tags/ES6/">ES6</a><small>3</small></li>
+  
+    <li><a href="/tags/HTML5/">HTML5</a><small>2</small></li>
+  
+    <li><a href="/tags/LESS/">LESS</a><small>1</small></li>
+  
+    <li><a href="/tags/SASS/">SASS</a><small>2</small></li>
+  
+    <li><a href="/tags/WebStorm/">WebStorm</a><small>2</small></li>
+  
+    <li><a href="/tags/Windows-Phone/">Windows Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/Works/">Works</a><small>3</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>2</small></li>
+  
+    <li><a href="/tags/jQuery-Mobile/">jQuery Mobile</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>8</small></li>
+  
+    <li><a href="/tags/learning-es6/">learning, es6</a><small>0</small></li>
+  
+    <li><a href="/tags/閒聊/">閒聊</a><small>1</small></li>
   
   </ul>
 </div>
