@@ -49,6 +49,51 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-01-11T00:45:00.000Z"><a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/">2014-01-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/">jQuery Widget Factory極簡教學</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="簡介">簡介</h2><p>jQuery Widget Factory是jQuery UI提供的一個方法，用Factory Mode來建立 <strong>有狀態的</strong> jQuery plugin。大多數的jQueryUI都是用這個方法產生的，例如<code>button</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"ui.button"</span>, &#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>不過也有些是例外，像<code>datepicker</code>就不是用這個方法產生的。</p>
+<h2 id="如何使用">如何使用</h2><p>這個方法是基於jQuery，而不是jQuery UI Core，但是他的位置是在jQueryui.js裡面，所以兩者都必須引入</p>
+<blockquote>
+<p>註：如果不需要其他jQueryUI的話，可以只載入jquery.ui.widget.js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-1.9.1.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"Libs/jquery-ui-1.10.3.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>方法的格式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.widget(<span class="string">'namespace.uiName'</span>, [base], prototype)</span><br></pre></td></tr></table></figure></p>
+<p><code>namespace</code>只能有一層，像jQueryUI就是用<code>ui.button</code><br><code>[base]</code>可選，用來指定已存在的物件當作基底，預設值是<code>$.widget</code>。例如你想要以jqueryUI的<code>dialog</code>為基底產生一個新的plugin，就可以像這樣：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.widget( <span class="string">"custom.superDialog"</span>, $.ui.dialog, &#123;</span><br><span class="line">    red: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element.css( <span class="string">"color"</span>, <span class="string">"red"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><code>prototype</code>這個widget的prototype object，套件的方法及設定都在這裡實作。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/01/11/2014-01-11-experiencejquery-widget-factory/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-01-10T23:36:00.000Z"><a href="/2014/01/11/2014-01-11-output-on-top-of-the-picture-message-jquery-plugin-commentonphoto/">2014-01-11</a></time>
       
       
@@ -375,39 +420,6 @@
     <div class="entry">
       
         <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/github-pages-octopress-on-windows.html" target="_blank" rel="external">點此</a>觀看原文．</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-12-13T23:27:00.000Z"><a href="/2013/12/14/2013-12-14-javascript-good-parts-ch5/">2013-12-14</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/12/14/2013-12-14-javascript-good-parts-ch5/">Javascript : The Good Parts - Ch.5 繼承 (一)</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>此篇文章位於<a href="http://apolkingg8.blogspot.com/" target="_blank" rel="external">舊的Blogger</a>，因為轉移過程中有格式缺漏，請<a href="http://apolkingg8.blogspot.com/2013/12/javascript-good-parts-ch5.html" target="_blank" rel="external">點此</a>觀看原文．</p>
 
       
     </div>
